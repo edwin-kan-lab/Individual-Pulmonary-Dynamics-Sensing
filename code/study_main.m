@@ -433,7 +433,6 @@ else
     
     %% NCS downsampling & filtering
     disp('Processing NCS');
-    load('pig_filter.mat');
 
     ncs.dsRate = 10; 
     ncs.fNcsDS = fNcsOrig/ncs.dsRate;
@@ -760,30 +759,29 @@ overall_start_loc = getLocFromTime(spiro.locs, start_times(1), date_.seconds_off
 clearvars ncs_TVs ncs_Base spiro_TVs spiro_Base cvi_TVs cvi_Base snrs lins
 
 %% Run All Analysis Combinations 
-calibs = {'single', 'cubic', 'twopoint'};
-combinations = {'all', 'topk', 'topPM', 'topKMag'};
-% scorings = {'snr', 'lin', 'unif'}; 
-scorings = {'lr', 'lr2', 'lrC'};
+% calibs = {'single', 'cubic', 'twopoint'};
+calibs = {'single'}
+combinations = {'all', 'topk'};
+scorings = {'snr', 'lin', 'unif'}; 
+occhs = {'lr', 'lr2', 'lrC'};
 
 if strcmp(interventionType_Orig, 'lungocclusion')
     for sc=1:length(scorings)
-        scoring = scorings{sc};
-        generateOcclusionResults(opts, overall_start_loc, spiro, end_times, ...
-            date_, start_true, deflate_true, cpap_true, ncs, calib_st, calib_en, ...
-            ncs_sig, dFileDate, scoring)
+        chs = occhs{sc};
+        generateOcclusionResults(opts, overall_start_loc, spiro, ...
+            end_times, date_, start_true, deflate_true, cpap_true, ncs, ...
+            calib_st, calib_en, dFileDate, chs, toSave);
     end 
-else
+elseif strcmp(interventionType_Orig, 'tidalvol')
     for cind = 1:length(calibs)
         calib_method = calibs{cind};
         for sc = 1:length(scorings)
             scoring = scorings{sc};
             for cx = 1:length(combinations)
-                comb = combinations{cx};
-                if strcmp(interventionType_Orig, 'tidalvol')
-                    generateTidalVolumeResults(ncs, spiro, stage, comb, ...
-                        calib_method, scoring, snr_scores, lin_scores, ...
-                        dFileDate, toSave);
-                end 
+                comb = combinations{cx};     
+                generateTidalVolumeResults(ncs, spiro, stage, comb, ...
+                    calib_method, scoring, snr_scores, lin_scores, ...
+                    dFileDate, toSave);
             end
         end 
     end 

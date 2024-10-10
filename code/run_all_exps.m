@@ -1,6 +1,6 @@
 % Run all experiments
 clc; 
-
+addpath(genpath(pwd))
 dates = {'02-05-24', '02-06-24', '02-07-24', '02-08-24', '03-04-24', ...
     '03-05-24', '03-06-24', '03-07-24'}; 
 toSave = true; 

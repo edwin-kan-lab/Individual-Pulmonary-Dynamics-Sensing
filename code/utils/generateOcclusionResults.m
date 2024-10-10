@@ -1,8 +1,7 @@
 function generateOcclusionResults(opts, overall_start_loc, spiro, end_times, ...
     date_, start_true, deflate_true, cpap_true, ncs, calib_st, calib_en, ...
-    ncs_sig, dFileDate, scoring)
+    dFileDate, scoring, toSave)
     
-    toSave = true; 
     ncs_sig = ncs.ncsRespFilt;
     
     % Time start and end for time series signal plots 
@@ -32,7 +31,7 @@ function generateOcclusionResults(opts, overall_start_loc, spiro, end_times, ...
     cen = getLocFromTime(spiro.locs, calib_en, date_.seconds_offset, 100);
     for ch=1:8 
         scores(ch) = getSNROcclusion(ncs_sig(ncs.locs(cst): ncs.locs(cen), ch), ...
-                1000, [0.18 0.4]);
+                1000, [0.18 0.35]);
     end 
     
     if strcmp(scoring, 'lr')
@@ -77,14 +76,14 @@ function generateOcclusionResults(opts, overall_start_loc, spiro, end_times, ...
     lr = left_tv./right_tv;
     
     % Detect Occlusion using thresholding on moving average 
-    [a, b] = getOcclusionPointsV3(lr); 
+    [a, b] = getOcclusionPointsV2(lr); 
 
     % Error Handling: No point detected
     if length(a) == 0
         a = 1; 
     end 
     if length(b) == 0
-        b = length(lr_comb);
+        b = length(lr);
     end 
     
     % Figure 1
