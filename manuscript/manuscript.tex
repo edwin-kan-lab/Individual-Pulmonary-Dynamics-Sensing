@@ -1,23 +1,15 @@
-%% bare_jrnl.tex
-%% V1.4b
-%% 2015/08/26
-%% by Michael Shell
-%% see http://www.michaelshell.org/
-%% for current contact information.
-%%
-%% This is a skeleton file demonstrating the use of IEEEtran.cls
-%% (requires IEEEtran.cls version 1.8b or later) with an IEEE
-%% journal paper.
-%%
-%% Support sites:
-%% http://www.michaelshell.org/tex/ieeetran/
-%% http://www.ctan.org/pkg/ieeetran
-%% and
-%% http://www.ieee.org/
-\documentclass[journal]{IEEEtran}
-% Essential packages
+\documentclass[journal,twoside,web]{ieeecolor}
+\usepackage{xcolor}
+\usepackage{jsen}
 \usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{wrapfig}
+% \usepackage{cite}
 \usepackage{array}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \usepackage{multirow}
 \usepackage[
     backend=biber,
@@ -35,306 +27,39 @@
 % omit the fixed 'in' macro used in bibliography
 \renewbibmacro{in:}{}
 
-% re-declare field formats (font, brackets ...)
-% omit " around title
-\DeclareFieldFormat*{title}{#1}
-% omit the 'pp' for pages
-\DeclareFieldFormat*{pages}{#1}
-% put brackets around number
-\DeclareFieldFormat*{number}{\mkbibparens{#1}}
-
-% print format <vol><number>:<pages>
-\renewbibmacro*{volume+number+eid}{%
-  \setunit{\addcomma\space}%
-  \printfield{volume}%
-  \printfield{number}%
-  \setunit{\addcolon}%
-  \printfield{pages}}
-% do not print the pages in this part (already done before)
-\renewbibmacro*{note+pages}{%
-  \printfield{note}%
-  \newunit}
-  
-\usepackage{mathtools}
-% *** GRAPHICS RELATED PACKAGES ***
-%
-\ifCLASSINFOpdf
-   \usepackage[pdftex]{graphicx}
-  % declare the path(s) where your graphic files are
-  % \graphicspath{{../pdf/}{../jpeg/}}
-  % and their extensions so you won't have to specify these with
-  % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
-\else
-  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
-  % will default to the driver specified in the system graphics.cfg if no
-  % driver is specified.
-   \usepackage[dvips]{graphicx}
-  % declare the path(s) where your graphic files are
-  % \graphicspath{{../eps/}}
-  % and their extensions so you won't have to specify these with
-  % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.eps}
-\fi
-% graphicx was written by David Carlisle and Sebastian Rahtz. It is
-% required if you want graphics, photos, etc. graphicx.sty is already
-% installed on most LaTeX systems. The latest version and documentation
-% can be obtained at: 
-% http://www.ctan.org/pkg/graphicx
-% Another good source of documentation is "Using Imported Graphics in
-% LaTeX2e" by Keith Reckdahl which can be found at:
-% http://www.ctan.org/pkg/epslatex
-%
-% latex, and pdflatex in dvi mode, support graphics in encapsulated
-% postscript (.eps) format. pdflatex in pdf mode supports graphics
-% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
-% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
-% not a bitmapped formats (.jpeg, .png). The IEEE frowns on bitmapped formats
-% which can result in "jaggedy"/blurry rendering of lines and letters as
-% well as large increases in file sizes.
-%
-% You can find documentation about the pdfTeX application at:
-% http://www.tug.org/applications/pdftex
-
-
-
-
-
-% *** MATH PACKAGES ***
-%
-%\usepackage{amsmath}
-% A popular package from the American Mathematical Society that provides
-% many useful and powerful commands for dealing with mathematics.
-%
-% Note that the amsmath package sets \interdisplaylinepenalty to 10000
-% thus preventing page breaks from occurring within multiline equations. Use:
-%\interdisplaylinepenalty=2500
-% after loading amsmath to restore such page breaks as IEEEtran.cls normally
-% does. amsmath.sty is already installed on most LaTeX systems. The latest
-% version and documentation can be obtained at:
-% http://www.ctan.org/pkg/amsmath
-
-
-
-
-
-% *** SPECIALIZED LIST PACKAGES ***
-%
-%\usepackage{algorithmic}
-% algorithmic.sty was written by Peter Williams and Rogerio Brito.
-% This package provides an algorithmic environment fo describing algorithms.
-% You can use the algorithmic environment in-text or within a figure
-% environment to provide for a floating algorithm. Do NOT use the algorithm
-% floating environment provided by algorithm.sty (by the same authors) or
-% algorithm2e.sty (by Christophe Fiorio) as the IEEE does not use dedicated
-% algorithm float types and packages that provide these will not provide
-% correct IEEE style captions. The latest version and documentation of
-% algorithmic.sty can be obtained at:
-% http://www.ctan.org/pkg/algorithms
-% Also of interest may be the (relatively newer and more customizable)
-% algorithmicx.sty package by Szasz Janos:
-% http://www.ctan.org/pkg/algorithmicx
-
-
-
-
-% *** ALIGNMENT PACKAGES ***
-%
-\usepackage{array}
-% Frank Mittelbach's and David Carlisle's array.sty patches and improves
-% the standard LaTeX2e array and tabular environments to provide better
-% appearance and additional user controls. As the default LaTeX2e table
-% generation code is lacking to the point of almost being broken with
-% respect to the quality of the end results, all users are strongly
-% advised to use an enhanced (at the very least that provided by array.sty)
-% set of table tools. array.sty is already installed on most systems. The
-% latest version and documentation can be obtained at:
-% http://www.ctan.org/pkg/array
-\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-
-% IEEEtran contains the IEEEeqnarray family of commands that can be used to
-% generate multiline equations as well as matrices, tables, etc., of high
-% quality.
-
-
-
-
-% *** SUBFIGURE PACKAGES ***
-\ifCLASSOPTIONcompsoc
-  \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
-\else
-  \usepackage[caption=false,font=footnotesize]{subfig}
-\fi
-% subfig.sty, written by Steven Douglas Cochran, is the modern replacement
-% for subfigure.sty, the latter of which is no longer maintained and is
-% incompatible with some LaTeX packages including fixltx2e. However,
-% subfig.sty requires and automatically loads Axel Sommerfeldt's caption.sty
-% which will override IEEEtran.cls' handling of captions and this will result
-% in non-IEEE style figure/table captions. To prevent this problem, be sure
-% and invoke subfig.sty's "caption=false" package option (available since
-% subfig.sty version 1.3, 2005/06/28) as this is will preserve IEEEtran.cls
-% handling of captions.
-% Note that the Computer Society format requires a larger sans serif font
-% than the serif footnote size font used in traditional IEEE formatting
-% and thus the need to invoke different subfig.sty package options depending
-% on whether compsoc mode has been enabled.
-%
-% The latest version and documentation of subfig.sty can be obtained at:
-% http://www.ctan.org/pkg/subfig
-
-
-
-
-% *** FLOAT PACKAGES ***
-%
-%\usepackage{fixltx2e}
-% fixltx2e, the successor to the earlier fix2col.sty, was written by
-% Frank Mittelbach and David Carlisle. This package corrects a few problems
-% in the LaTeX2e kernel, the most notable of which is that in current
-% LaTeX2e releases, the ordering of single and double column floats is not
-% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
-% single column figure to be placed prior to an earlier double column
-% figure.
-% Be aware that LaTeX2e kernels dated 2015 and later have fixltx2e.sty's
-% corrections already built into the system in which case a warning will
-% be issued if an attempt is made to load fixltx2e.sty as it is no longer
-% needed.
-% The latest version and documentation can be found at:
-% http://www.ctan.org/pkg/fixltx2e
-
-
-%\usepackage{stfloats}
-% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
-% the ability to do double column floats at the bottom of the page as well
-% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
-% LaTeX2e). It also provides a command:
-%\fnbelowfloat
-% to enable the placement of footnotes below bottom floats (the standard
-% LaTeX2e kernel puts them above bottom floats). This is an invasive package
-% which rewrites many portions of the LaTeX2e float routines. It may not work
-% with other packages that modify the LaTeX2e float routines. The latest
-% version and documentation can be obtained at:
-% http://www.ctan.org/pkg/stfloats
-% Do not use the stfloats baselinefloat ability as the IEEE does not allow
-% \baselineskip to stretch. Authors submitting work to the IEEE should note
-% that the IEEE rarely uses double column equations and that authors should try
-% to avoid such use. Do not be tempted to use the cuted.sty or midfloat.sty
-% packages (also by Sigitas Tolusis) as the IEEE does not format its papers in
-% such ways.
-% Do not attempt to use stfloats with fixltx2e as they are incompatible.
-% Instead, use Morten Hogholm'a dblfloatfix which combines the features
-% of both fixltx2e and stfloats:
-%
-% \usepackage{dblfloatfix}
-% The latest version can be found at:
-% http://www.ctan.org/pkg/dblfloatfix
-
-
-
-
-%\ifCLASSOPTIONcaptionsoff
-%  \usepackage[nomarkers]{endfloat}
-% \let\MYoriglatexcaption\caption
-% \renewcommand{\caption}[2][\relax]{\MYoriglatexcaption[#2]{#2}}
-%\fi
-% endfloat.sty was written by James Darrell McCauley, Jeff Goldberg and 
-% Axel Sommerfeldt. This package may be useful when used in conjunction with 
-% IEEEtran.cls'  captionsoff option. Some IEEE journals/societies require that
-% submissions have lists of figures/tables at the end of the paper and that
-% figures/tables without any captions are placed on a page by themselves at
-% the end of the document. If needed, the draftcls IEEEtran class option or
-% \CLASSINPUTbaselinestretch interface can be used to increase the line
-% spacing as well. Be sure and use the nomarkers option of endfloat to
-% prevent endfloat from "marking" where the figures would have been placed
-% in the text. The two hack lines of code above are a slight modification of
-% that suggested by in the endfloat docs (section 8.4.1) to ensure that
-% the full captions always appear in the list of figures/tables - even if
-% the user used the short optional argument of \caption[]{}.
-% IEEE papers do not typically make use of \caption[]'s optional argument,
-% so this should not be an issue. A similar trick can be used to disable
-% captions of packages such as subfig.sty that lack options to turn off
-% the subcaptions:
-% For subfig.sty:
-% \let\MYorigsubfloat\subfloat
-% \renewcommand{\subfloat}[2][\relax]{\MYorigsubfloat[]{#2}}
-% However, the above trick will not work if both optional arguments of
-% the \subfloat command are used. Furthermore, there needs to be a
-% description of each subfigure *somewhere* and endfloat does not add
-% subfigure captions to its list of figures. Thus, the best approach is to
-% avoid the use of subfigure captions (many IEEE journals avoid them anyway)
-% and instead reference/explain all the subfigures within the main caption.
-% The latest version of endfloat.sty and its documentation can obtained at:
-% http://www.ctan.org/pkg/endfloat
-%
-% The IEEEtran \ifCLASSOPTIONcaptionsoff conditional can also be used
-% later in the document, say, to conditionally put the References on a 
-% page by themselves.
-
-% *** PDF, URL AND HYPERLINK PACKAGES ***
-\usepackage{url}
-
-\renewcommand{\arraystretch}{1.5}
-% Do not adjust lengths that control margins, column widths, etc. Do not use packages that alter fonts (such as pslatex).
-% There should be no need to do such things with IEEEtran.cls V1.6 and later. (Unless specifically asked to do so by the journal or conference you plan to submit to, of course.)
-
-% correct bad hyphenation here
-\hyphenation{PEEP net-works semi-conduc-tor}
+% \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+%     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+% \markboth{\journalname, VOL. XX, NO. XX, XXXX 2024}
+% {Author \MakeLowercase{\textit{et al.}}: Preparation of Papers for IEEE TRANSACTIONS and JOURNALS (May 2024)}
+\definecolor{abstractbg}{rgb}{0.89804,0.94510,0.83137}
+\setlength{\fboxrule}{0pt}
+\setlength{\fboxsep}{0pt} 
 
 \begin{document}
-% Titles are generally capitalized except for words such as a, an, and, as, at, but, by, for, in, nor, of, on, or, the, to and up, which are usually not capitalized unless they are the first or last word of the title. Linebreaks \\ can be used within to get better formatting as desired.Do not put math or special symbols in the title.
-%\title{Near-Field Radio Sensing of Continuous Lung Volumes and Isolation}
-\title{Continuous Sensing of Left and Right Lung Volumes Using Near-Field Radio-Frequency Sensors}
-% Note positions of commas and nonbreaking spaces (~). LaTeX will not break a structure at a ~ so this keeps an author's name from being broken across two lines.
-\author{Aakash~Kapoor,~\IEEEmembership{Student~Member,~IEEE,}
-        Thomas~B.~Conroy,~\IEEEmembership{Student~Member,~IEEE,}
-        Kapil~Gangwar,~\IEEEmembership{Student~Member,~IEEE,}
-        Edwin~C.~Kan,~\IEEEmembership{Senior~Member,~IEEE,}
-        and Joaquin~Araos% <-this % stops a space
-\thanks{AK, TBC, KG, and ECK are with the School of Electrical and Computer Engineering, and JA is with the College of Veterinary Medicine, at Cornell University, Ithaca, NY 14853 USA (email: ak2247@cornell.edu)}}
+\title{A Near-Field Radio-Frequency System for Continuous Left and Right Lung Volume Sensing}
+\author{Aakash~Kapoor,~\IEEEmembership{Student~Member,~IEEE,} Thomas~B.~Conroy,~\IEEEmembership{Student~Member,~IEEE,} Kapil~Gangwar,~\IEEEmembership{Student~Member,~IEEE,} Edwin~C.~Kan,~\IEEEmembership{Senior~Member,~IEEE,} and Joaquin~Araos
+\thanks{Research reported in this article was supported by the National Institutes of Health under award 1R21EB034562-01.}
+\thanks{AK, TBC, KG, and ECK are with the Department of Electrical and Computer Engineering, Cornell University, Ithaca, NY 14853, USA. JA is with the College of Veterinary Medicine, Cornell University, Ithaca, NY 14853 USA (email: ak2247@cornell.edu)}}
 
-% The paper headers
-\markboth{IEEE Transactions on Biomedical Engineering}%
-% {Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for IEEE Journals}
-% The only time the second header will appear is for the odd numbered pages
-% after the title page when using the twoside option.
-% 
-% *** Note that you probably will NOT want to include the author's ***
-% *** name in the headers of peer review papers.                   ***
-% You can use \ifCLASSOPTIONpeerreview for conditional compilation here if
-% you desire.
-
-% If you want to put a publisher's ID mark on the page you can do it like
-% this:
-%\IEEEpubid{0000--0000/00\$00.00~\copyright~2015 IEEE}
-% Remember, if you use this you must call \IEEEpubidadjcol in the second
-% column for its text to clear the IEEEpubid mark.
-
-% use for special paper notices
-%\IEEEspecialpapernotice{(Invited Paper)}
-\maketitle
-
-% As a general rule, do not put math, special symbols or citations
-% in the abstract or keywords.
+\IEEEtitleabstractindextext{%
+\fcolorbox{abstractbg}{abstractbg}{%
+\begin{minipage}{\textwidth}%
+\begin{wrapfigure}[12]{r}{3in}%
+\includegraphics[width=2.96in]{gagraphic3.png}%
+\end{wrapfigure}%
 \begin{abstract}
-\emph{Objective:} We used near-field radio-frequency (NFRF) sensors on mechanically ventilated porcine models for continuous acquisition of pulmonary dynamics for each lung independently under various cardiopulmonary interventions. \emph{Methods:} NFRF sensors, previously shown to detect internal tissue motion, were deployed laterally across the pig chest to measure tidal volume during a stepped intervention. A reference spirometer was used for validation. We used bronchial blockers to isolate each lung, allowing us to demonstrate the novel capability of individually monitoring lung volumes. \emph{Results:} We demonstrated lung volume measurements with an average error of 9.2\% between NFRF and reference spirometry. We also showed individual lung dynamics during one-lung obstruction. \emph{Conclusion:} NFRF sensors provide a novel wearable method for continuous monitoring of individual lung dynamics. \emph{Significance:} NFRF sensing can be employed for real-time continuous lung monitoring, aiding the management of respiratory distress during acute and chronic conditions.  
+Many respiratory disorders are diagnosed by lung function tests, typically performed using spirometers in clinical settings. Non-invasive measures of lung function are of increasing interest to enable convenient, at-home wellness monitoring of respiratory distress. In this work, we used near-field radio-frequency (NFRF) sensors on mechanically ventilated porcine models for continuous acquisition of pulmonary dynamics for each lung independently under various cardiopulmonary interventions. NFRF sensors, previously shown to detect internal tissue motion, were deployed laterally across the pig chest to measure tidal volume during a stepped intervention. A reference spirometer was used for validation. We used bronchial blockers to isolate each lung, allowing us to demonstrate the novel capability of individually monitoring lung volumes. We demonstrated lung volume measurements with an average error of 9.2\% between NFRF and reference spirometry. We also showed individual lung dynamics during one-lung obstruction. The results of this work demonstrates NFRF sensors as a novel wearable method for continuous monitoring of individual lung volumes, aiding the management of respiratory distress during acute and chronic conditions, as well as for detecting early onset of life-threatening conditions such as pneumothorax. 
 \end{abstract}
 
-% Note that keywords are not normally used for peer-review papers.
 \begin{IEEEkeywords}
-Lung volumes, near-field radio-frequency, one-lung ventilation, wellness monitoring
+Lung volumes, near-field radio-frequency, wearable devices, wellness monitoring
 \end{IEEEkeywords}
+\end{minipage}}}
 
-% For peer review papers, you can put extra information on the cover
-% page as needed:
-% \ifCLASSOPTIONpeerreview
-% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
-% \fi
-%
-% For peerreview papers, this IEEEtran command inserts a page break and
-% creates the second title. It will be ignored for other modes.
-\IEEEpeerreviewmaketitle
+\maketitle
 
 \section{Introduction}
+\label{sec:introduction}
 \IEEEPARstart{P}{ulmonary} health conditions, especially chronic respiratory diseases (CRDs), are among the top causes of mortality globally with some estimates suggesting more than half a billion prevalent cases \cite{viegiGlobalBurdenChronic2020}. Of special concern, two of the most prominent CRDs, chronic obstructive pulmonary disease (COPD) and asthma, exhibit an increasing prevalence among the populace in long-term studies \cite{boersGlobalBurdenChronic2023}. This may be explained by the increasing risk factors for CRDs, including high body-mass index (BMI) and air pollution. Obesity is a major health concern comparable to a hidden epidemic \cite{boutari2022UpdateEpidemiology2022}. Large swathes of the world, primarily under-developed and developing countries, live at unhealthy levels of air pollution \cite{rentschlerGlobalAirPollution2023}. The climate change crisis is expected to exacerbate the situation \cite{andersenClimateChangeRespiratory2023}, under-scoring the urgent need for improving respiratory health monitoring. \\
 Increasing global inter-connection due to modern economy and lifestyle has contributed to severe infectious disease outbreaks. Recent pandemics, including severe acute respiratory syndrome (SARS) in 2003, Middle East respiratory syndrome (MERS) in 2012, and COVID-19 in 2019, have involved contagious pathogens impacting respiratory health \cite{bakerInfectiousDiseaseEra2022}. Infectious diseases, trauma, and septic shock are among the leading causal factors for acute respiratory distress syndrome (ARDS). Furthermore, mechanically ventilated patients in intensive care units (ICU) are at particular risks of developing ARDS. Timely management of respiratory conditions is instrumental in improving patient outcomes \cite{leffCOPDClinicalSignificance2005} \cite{arriveEarlyIdentificationDiagnostic2021}, but can be challenging for patients who are less symptomatic or have difficulty communicating their symptoms. \\
 Wearable devices contribute to improved health outcomes in multiple ways: providing continuous vital measurements useful for remote health diagnosis, predicting aggravated episodes of chronic conditions, and enhancing integrated disease management. Wearables such as step counters have been observed to improve behavioral patterns which help manage chronic diseases \cite{shahWearableTechnologyInterventions2023}. A meta-review of studies demonstrated the predictability of COPD exacerbation by vital-sign monitoring devices in which lung function measurements using spirometers and blood oxygen saturation levels (SpO$_2$) from pulse oximeters were the most predictive variables of exacerbative episodes \cite{alrajehMonitoringPhysiologicalParameters2016}. \\
@@ -350,6 +75,7 @@ Pulmonary function tests measure lung volumes, typically using spirometers as th
 Strain sensors use piezoresistivity which exhibits changes in resistance proportional to strain. This allows strain sensors to be significantly smaller and more convenient than RIP devices. Similar to RIP, strain sensors are usually placed across the abdomen and chest, typically by the use of elastic belts, to estimate lung volume dynamics by measuring changes in the chest surface. Piezoresistive strain sensors are versatile and may be integrated into smart clothing. However, they are sensitive to movement artifacts which require additional equipment, such as accelerometers, for correction \cite{defazioOverviewWearablePiezoresistive2021}. Since strain sensors and RIP are limited to measuring changes in the chest surface, they cannot differentiate between individual lung volumes and cannot be used for early detection of abnormalities such as atelectasis. \\
 EIT uses electrodes placed around the thorax, with small alternating current (AC) excitation. The resulting voltage measurements are used to reconstruct internal impedance distributions. Suitable parameter reconstruction algorithms are used to generate tomographic images \cite{mansouriElectricalImpedanceTomography2021}. An appropriately large number of electrodes must be chosen for sufficient spatial resolution. This is particularly crucial for EIT images towards estimating lung function \cite{pennatiElectricalImpedanceTomography2023}. EIT systems are non-invasive, real-time and economical in comparison to techniques such as X-ray-based computer tomography (CT). However, image reconstruction from EIT may still be computationally intensive which might be of concern for long-term wearable monitors \cite{boyleAddressingComputationalCost2012} and current available commercial units are expensive and require specialized expertise for application. \\
 Near-field radio-frequency (NFRF) sensing provides a viable alternative to the above vital-sign monitoring technologies. Transmitting (Tx) and receiving (Rx) antennas placed proximal to the chests of human study participants were used for sensing tissue motion and tidal volumes were estimated under a variety of conditions using a linear regression model \cite{sharmaWearableRFSensor2019}\cite{sharmaWearableRadiofrequencySensing2020}. NFRF setups have also been attempted for evaluating respiratory efforts in COPD patients and for providing objective respiratory scores to correlate with subjective dyspnea self reports \cite{zhangFeasibilityStudyUsing2024}\cite{zhangObjectiveScoringPhysiologically2022}. The versatility of the NFRF method has been demonstrated by integrating sensors in beds for detection and prediction of sleep apnea \cite{zhangFurnitureIntegratedRespirationSensors2021}.  This paper introduces an NFRF sensor principle for designing an interpretable veterinary study for lung volume characterization. We deployed an NFRF system with enhanced self-interference cancellation upon 8 anesthetized and mechanically ventilated pigs. A stepped tidal volume intervention was examined to validate the ability to track lung volume dynamics across a wide range of lung conditions. Individual lung ventilation was achieved by selective bronchial collapse. The NFRF sensors were able to identify the reduction in ventilation of the collapsed lung which may have applications ranging from detection of acute pathology such as pneumothorax as well as confirmation of adequate lung isolation during surgical thoracoscopic procedures.
+
 \section{Methods}
 \subsection{Near-Field Radio-Frequency Sensing}
 Dielectric boundary motion, including surface and tissue, in the near-field region of a transmitter (Tx) antenna modulates the antenna characteristics \cite{huiMonitoringVitalSigns2018}, and can be retrieved in the receiver (Rx) baseband in both the magnitude and phase under the quadrature modulation scheme. For a spherical dielectric with time-varying radius in the near-field region of Tx antenna \cite{zhouBackscatterFieldModel2023}, the electric field strength of the continuous wave at Rx can be modeled by the backscattering approximation as:  
@@ -493,8 +219,8 @@ Bland-Altman (B\&A) plots \cite{martinblandSTATISTICALMETHODSASSESSING1986}\cite
     \item \textbf{Linearity} was defined as the ratio of fundamental breath signal power to the power of its second harmonic. 
     \item \textbf{Uniform} was a naive strategy where each channel was given an equal weight.
 \end{itemize}
-Uniformly assigning weights to all channels was used as a benchmark to provide a measure of baseline performance of the NFRF system. SIR and linearity, two adaptive strategies that continuously change through the experiment as the received signal characteristics change, were compared against the uniform benchmark. We observe in Table \ref{tab:mape} that the baseline NFRF performance is in good agreement with the ground truth. We also observe the potential for performance improvement by using appropriate adaptive strategies. For most of the subjects, we observe the SIR weighting strategy to be the best overall while the linearity weighting strategy is almost always the worst. This makes intuitive sense as NFRF signals pertaining to lung motion maintained consistent morphology, leading to linearity an unrepresentative indicator of signal quality. On the other hand, a uniform weighting of all channels was observed to make the system susceptible to variance introduced by extremely poor channels. By penalizing poorly performing channels adaptively, the SIR quality metric was observed to be less susceptible to degradation in individual channel quality. A lower standard deviation using the SIR quality metric may further underscore its robustness for continuous tidal volume estimation. \\
-\begin{table}
+Uniformly assigning weights to all channels was used as a benchmark to provide a measure of baseline performance of the NFRF system. SIR and linearity, two adaptive strategies that continuously change through the experiment as the received signal characteristics change, were compared against the uniform benchmark. We observe in Table \ref{tab:mape} that the baseline NFRF performance is in good agreement with the ground truth. We also observe the potential for performance improvement by using appropriate adaptive strategies. For most of the subjects, we observe the SIR weighting strategy to be the best overall while the linearity weighting strategy is almost always the worst. This makes intuitive sense as NFRF signals pertaining to lung motion maintained consistent morphology, leading to linearity an unrepresentative indicator of signal quality. On the other hand, a uniform weighting of all channels was observed to make the system susceptible to variance introduced by extremely poor channels. By penalizing poorly performing channels adaptively, the SIR quality metric was observed to be less susceptible to degradation in individual channel quality. A lower standard deviation using the SIR quality metric may further underscore its robustness for continuous tidal volume estimation. 
+\begin{table}[htbp]
 \caption{\textbf{Quality Metric Choice.} MAPE across all levels of $V_T$ is evaluated using different scoring metrics.}
 \centering
 \begin{tabular}{| C{4em} | C{6em} | C{6em} |  C{6em} |} 
@@ -521,8 +247,8 @@ Uniformly assigning weights to all channels was used as a benchmark to provide a
 % Center the columns
 \end{tabular}
 \label{tab:mape}
-\end{table}
-\hspace{-0.5em}The correlation between $V^{NFRF}_T$ obtained by using the SIR quality metric, and $V^{spiro}_T$ is visualized in Fig.~\ref{fig:results}(b). An overall correlation coefficient of 0.92 and an overall MAPE of 9.2\% was observed between the NFRF tidal volume and the reference spirometer. We note that Table \ref{tab:mape} measures the average of per-subject MAPE values, a fundamentally different quantity from the overall MAPE, indicated in Fig.~\ref{fig:results}, computed using data collected across all subjects. The volumetric relation in Eq.~\ref{eq:lin_vol} deteriorates at high tidal volumes but stays applicable at normal tidal volumes. This is expected because the lung is not spherical and for very large volume changes, we may no longer assume a simple spherical change.  
+\end{table}\\
+The correlation between $V^{NFRF}_T$ obtained by using the SIR quality metric, and $V^{spiro}_T$ is visualized in Fig.~\ref{fig:results}(b). An overall correlation coefficient of 0.92 and an overall MAPE of 9.2\% was observed between the NFRF tidal volume and the reference spirometer. We note that Table \ref{tab:mape} measures the average of per-subject MAPE values, a fundamentally different quantity from the overall MAPE, indicated in Fig.~\ref{fig:results}, computed using data collected across all subjects. The volumetric relation in Eq.~\ref{eq:lin_vol} deteriorates at high tidal volumes but stays applicable at normal tidal volumes. This is expected because the lung is not spherical and for very large volume changes, we may no longer assume a simple spherical change.  
 \subsection{Detecting Lung Obstruction}
 \begin{figure*}[ht]
     \centering
@@ -532,7 +258,7 @@ Uniformly assigning weights to all channels was used as a benchmark to provide a
 \end{figure*}
 By placing the NFRF sensors on either side of the chest, we ensured that each sensor was coupled primarily to the motion of its nearest lung. This enabled us to monitor the continuous change in the tidal volume for each lung independently. The calibration scheme of Eq.~\ref{eq:combine_channels} was modified to use only left and right channels for left and right lung tidal volume estimates, respectively. Fig.~\ref{fig:occlusion_lr} demonstrates how the NFRF volume estimates changed through the occlusion procedure. Since the pig was mechanically ventilated with a constant airflow throughout the intervention, we expect an increase in right lung tidal volume concurrent with a drop in the left lung tidal volumes. We clearly see this behavior in the processed NFRF signals in Fig.~\ref{fig:occlusion_lr}(a). \\
 Lung obstruction was detected when the left and right lung tidal volume ratio fell below the empirically chosen threshold of 0.75. The obstruction was considered cleared once the ratio exceeded the threshold again. In order to prevent transients from sudden sensor motion, we monitored the tidal volume ratio over a window of 3 breaths. In the future, when patients are not mechanically ventilated and balloon occluded, the observed change is expected to be much more gradual. Correspondingly, suitable changes to the empirical threshold may be performed to achieve an optimal balance of sensitivity and 1-specificity for the targeted application. In Table \ref{tab:occlusion}, we report the detected occlusion epochs using the above thresholding algorithm. The mean absolute error between actual and predicted onset of obstruction was observed to be 8.29 breaths, owed in part to the 3 breath wait deployed for transient removal. Lung recruitment was observed to show inter-subject differences, with some pigs showing strong recruitment simply after blocker deflation while others requiring the forced CPAP event. Pigs 1-4, which showed recruitment after forced CPAP, had a mean absolute error of 1 breath between the predicted blockage clearance and forced CPAP. Pigs 5 and 7, on the other hand, showed recruitment after blocker deflation with a mean absolute error of 0.5 breaths between the predicted blockage clearance and actual deflation epoch. There were significant external perturbations throughout the protocol for Pig 6, leading to an ill-defined calibration period and spurious detection of clearance of blockage. 
-\begin{table}
+\begin{table}[htbp]
 \caption{\textbf{Left lung obstruction detection.} Breaths at which occlusion is detected and cleared.}
     \begin{tabular}{|C{2em} | C{3.5em} | C{4em} | C{3em} | C{4.5em} | C{4.5em}|}
 \hline
@@ -569,110 +295,24 @@ While experts debate on the broad applicability of artificial intelligence to he
 We demonstrated a near-field radio sensing system for continuous monitoring of lung volumes. A stepped change experimental protocol was performed on 8 mechanically ventilated pigs. Data were simultaneously collected from the NFRF system and reference spirometry throughout the procedure. Acquired radio signals were processed, calibrated and benchmarked against reference. We observed excellent agreement between NFRF and reference measurements of lung volumes within reasonable limits. A correlation coefficient of 0.92 was observed in the current study in comparison to 0.81 obtained in prior studies utilizing NFRF sensors for lung tidal volume estimation \cite{sharmaWearableRadiofrequencySensing2020}. \\
 We proposed a novel method for detecting sided lung collapse induced by bronchial blockers in the left main bronchus for 7 ventilated pigs. The NFRF sensor can detect obstructions in individual lungs, which is a functional advantage over spirometry which only represents overall airflow. Predicted epochs of airflow cessation and the following lung recruitment after blocker removal were observed to be in close proximity to experimentally observed epochs of lung obstruction. These findings demonstrate the potential of NFRF sensors for continuous, non-invasive monitoring, with significant implications for improving patient care in both acute and chronic respiratory conditions.
 
-% if have a single appendix:
-%\appendix[Proof of the Zonklar Equations]
-% or
-%\appendix  % for no appendix heading
-% do not use \section anymore after \appendix, only \section*
-% is possibly needed
-
-% use appendices with more than one appendix
-% then use \section to start each appendix
-% you must declare a \section before using any
-% \subsection or using \label (\appendices by itself
-% starts a section numbered zero.)
-%
-
-
-% use section* for acknowledgment
-\section*{Acknowledgment}
-Research reported in this article was supported by the National Institutes of Health under award 1R21EB034562-01. 
-
-% Can use something like this to put references on a page
-% by themselves when using endfloat and the captionsoff option.
-\ifCLASSOPTIONcaptionsoff
-  \newpage
-\fi
-
-
-
-% trigger a \newpage just before the given reference
-% number - used to balance the columns on the last page
-% adjust value as needed - may need to be readjusted if
-% the document is modified later
-%\IEEEtriggeratref{8}
-% The "triggered" command can be changed if desired:
-%\IEEEtriggercmd{\enlargethispage{-5in}}
-
-% references section
-
-% can use a bibliography generated by BibTeX as a .bbl file
-% BibTeX documentation can be easily obtained at:
-% http://mirror.ctan.org/biblio/bibtex/contrib/doc/
-% The IEEEtran BibTeX style support page is at:
-% http://www.michaelshell.org/tex/ieeetran/bibtex/
-%\bibliographystyle{IEEEtran}
-% argument is your BibTeX string definitions and bibliography database(s)
-%\bibliography{IEEEabrv,../bib/paper}
-%
-% <OR> manually copy in the resultant .bbl file
-% set second argument of \begin to the number of references
-% (used to reserve space for the reference number labels box)
-% \begin{thebibliography}{1}
-
-% \bibitem{IEEEhowto:kopka}
-% H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-%   0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
-
-% \end{thebibliography}
 \printbibliography
 
-% biography section
-% 
-% If you have an EPS/PDF photo (graphicx package needed) extra braces are
-% needed around the contents of the optional argument to biography to prevent
-% the LaTeX parser from getting confused when it sees the complicated
-% \includegraphics command within an optional argument. (You could create
-% your own custom macro containing the \includegraphics command to make things
-% simpler here.)
-%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
-% or if you just want to reserve a space for a photo:
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{aakash_corrected2.png}}]{Aakash Kapoor} (Graduate Student Member, IEEE) received the B.Tech degree in electrical engineering from Indian Institute of Technology (IIT) Bombay in 2020, and is currently pursuing the Ph.D. degree in electrical and computer engineering with Cornell University, Ithaca, NY, USA. 
+He worked as a Research Engineer at Samsung R\&D Institute, Bangalore, India from 2021 to 2022. His research interesting include biomedical signal processing, non-invasive sensing, sensor design, and machine learning. 
+\end{IEEEbiography}
 
-% \begin{IEEEbiography}{Aakash Kapoor}
-% Biography text here.
-% \end{IEEEbiography}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{thomas.jpg}}]{Thomas B. Conroy} received the B.S. degree in electrical engineering from Clarkson University, Potsdam, NY, USA, in 2019, and received the M.S. degree and Ph.D. degree in electrical and computer engineering from Cornell University, Ithaca, NY, USA in 2022 and 2024, respectively. He worked previously at the University of Rochester Heart Research Follow-Up Program on non-invasive arrhythmia detection from 2016 to 2017, and at Johnson \& Johnson Vision in Research and Development in 2018. His research interests include non-invasive biosensing, signal processing, cardiac sensing, and sensor design.
+\end{IEEEbiography}
 
-% \begin{IEEEbiographynophoto}{Kapil Gangwar}
-% Biography text here
-% \end{IEEEbiographynophoto}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{kapil.jpeg}}]{Kapil Gangwar} (Graduate Student Member, IEEE) was born on April 3, 1996. He is currently pursuing a Ph.D. under the guidance of Prof. Edwin C. Kan in the Department of Electrical and Computer Engineering at Cornell University. His research interests include biomedical sensors and instrumentation, microwave antennas, biomedical imaging, and related techniques. \\
+He received his B.Tech. degree in Electronics and Communication Engineering from the Indian Institute of Technology (ISM), Dhanbad, India, in 2019. He completed his Master of Science-thesis degree in Electromagnetics and Microwaves at the University of Alberta, Canada in 2022. His thesis focused on pediatric corpulence and knee osteoarthritis imaging using ultra-wideband radar systems, shaping his current research trajectory. He has authored or coauthored over 16 research papers in international, and national journals and conference proceedings.\\
+Mr. Gangwar was a recipient of many prestigious IEEE awards including IEEE Instrumentation \& Measurement Society (IMS) Graduate Fellowship Award 2024, IEEE Antennas \& Propagation Society (AP-S) Fellowship 2023 and 2022, IEEE Microwave Theory \& Technology Society (MTT-S) Undergraduate/Pre-Graduate Scholarship 2022 Cycle -1, IEEE AP-S Eugene F. Knott Memorial Pre-Doctoral Research Grant Award 2021, and many other scholarships at the University of Alberta.
+\end{IEEEbiography}
 
-% % if you will not have a photo at all:
-% \begin{IEEEbiographynophoto}{Thomas B. Conroy}
-% Thomas B. Conroy (Graduate Student Member, IEEE) received the B.S. degree in electrical engineering from Clarkson University, Potsdam, NY, USA, in 2019, and the M.S. degree in electrical and computer engineering from Cornell University, Ithaca, NY, in 2022, where he is currently pursuing the Ph.D. degree in electrical and computer engineering. He worked previously at the University of Rochester Heart Research Follow-Up Program on noninvasive arrhythmia detection from 2016 to 2017, and at Johnson \& Johnson Vision in Research and Development, in 2018. His research interests include noninvasive biosensing, signal processing, cardiac sensing, and sensor design.
-% \end{IEEEbiographynophoto}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{edwin.png}}]{Edwin C. Kan} (Senior Member, IEEE) received a B.S. degree from National Taiwan University in 1984, and M.S. and Ph.D. degrees from the University of Illinois, Urbana-Champaign in 1988 and 1992, respectively, all in Electrical Engineering. In January 1992, he joined Dawn Technologies, Sunnyvale CA, as a CAD Engineer. He was then with Stanford University as a Research Associate from 1994 to 1997. In 1997, he started as an Assistant Professor in School of Electrical and Computer Engineering, Cornell University, Ithaca, NY, where he is now a professor. His research interests include RF biosensors, RFID, RF imaging, CMOS technology, flash memory, molecular sensors, and technology computer-aided design (TCAD).
+\end{IEEEbiography}
 
-% % insert where needed to balance the two columns on the last page with
-% % biographies
-% %\newpage
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{joaquin.jpg}}]{Joaquin Araos} received his degree in veterinary medicine from Universidad Mayor, Chile, in 2007. He completed a residency in veterinary anesthesiology at the University of Pennsylvania, Philadelphia, in 2012, after which he obtained DACVAA certification. In 2017, he earned a Ph.D. in Clinical Sciences from Pontificia Universidad Católica de Chile. He then joined the University of Montreal as a clinical anesthesiologist. In 2019, he became a lecturer in anesthesiology at Cornell University, and as of July 2024, he is an associate professor on a tenure track. His research interests include heart-lung interactions, acute respiratory distress syndrome, extracorporeal support, and cardiopulmonary monitoring methods.
+\end{IEEEbiography}
 
-% \begin{IEEEbiographynophoto}{Edwin C. Kan}
-% Edwin C. Kan (Senior Member, IEEE) received a B.S. degree from National Taiwan University in 1984, and M.S. and Ph.D. degrees from the University of Illinois, Urbana-Champaign in 1988 and 1992, respectively, all in Electrical Engineering. In January 1992, he joined Dawn Technologies, Sunnyvale CA, as a CAD Engineer. He was then with Stanford University as a Research Associate from 1994 to 1997. In 1997, he started as an Assistant Professor in School of Electrical and Computer Engineering, Cornell University, Ithaca, NY, where he is now a professor. His research interests include RF biosensors, RFID, RF imaging, CMOS technology, flash memory, molecular sensors, and technology computer-aided design (TCAD).
-% \end{IEEEbiographynophoto}
-
-% % You can push biographies down or up by placing
-% % a \vfill before or after them. The appropriate
-% % use of \vfill depends on what kind of text is
-% % on the last page and whether or not the columns
-% % are being equalized.
-
-
-% %\vfill
-
-% % Can be used to pull up biographies so that the bottom of the last one
-% % is flush with the other column.
-% %\enlargethispage{-5in}
-
-
-
-% % that's all folks
 \end{document}
